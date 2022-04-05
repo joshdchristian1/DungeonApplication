@@ -52,6 +52,7 @@ namespace Dungeon
                     case "x":
                     case "escape":
                         Console.WriteLine("Thank you for playing the Dungeon Game\n\n");
+                           
                         goto endOfProgram;
                         break;//break the fall!
 
@@ -80,6 +81,7 @@ namespace Dungeon
 
                         case "a":
                             Console.WriteLine("Attack\n");
+                            //TODO Attack
                             break;//break the fall!
 
 
@@ -87,16 +89,18 @@ namespace Dungeon
                         //if withdraw, ask them for the amount to withdraw, and display the amount being withdrawn
                         case "r":
                             Console.WriteLine("Run away\n");
-
+                            //TODO Run away
                             break;//break the fall!
 
 
                         case "c":
                             Console.WriteLine("Character Information\n");
                             break;//break the fall!
+                            //TODO Character Information
 
                         case "m":
                             Console.WriteLine("Monster Information\n");
+                            //TODO Monster Information
                             break;//break the fall!
 
 
