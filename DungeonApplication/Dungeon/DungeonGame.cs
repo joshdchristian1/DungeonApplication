@@ -14,10 +14,55 @@ namespace Dungeon
             Console.Title = "Dungeon Game";
 
 
-            //TODO Create Character
             bool exitGame = false;
+        characterSelectMenu:;
             do
             {
+                Console.WriteLine("Please choose your Warrior");
+                Console.WriteLine("A) Rylan\nB) McKenna\nC) Rachel\nD) Josh\nX) Exit");
+                string userCharacter = Console.ReadKey(true).Key.ToString().ToLower();
+                Console.Clear();
+
+
+                switch (userCharacter)
+                {
+
+                    case "a":
+                        Console.WriteLine("You chose Rylan\n");
+                        break;//break the fall!
+
+
+
+                    //if withdraw, ask them for the amount to withdraw, and display the amount being withdrawn
+                    case "b":
+                        Console.WriteLine("You chose McKenna\n");
+
+                        break;//break the fall!
+
+
+                    case "c":
+                        Console.WriteLine("You chose Rachel\n");
+                        break;//break the fall!
+
+                    case "d":
+                        Console.WriteLine("You chose Josh\n");
+                        break;//break the fall!
+
+
+                    case "x":
+                    case "escape":
+                        Console.WriteLine("Thank you for playing the Dungeon Game\n\n");
+                        goto endOfProgram;
+                        break;//break the fall!
+
+
+                    default:
+                        Console.WriteLine("That was not a valid option.\n");
+                        goto characterSelectMenu;
+                        break;
+                }//end switch
+                //TODO Create Character
+
                 //TODO Create Monster
                 //TODO Create A Room
                 bool exit = false;
@@ -58,8 +103,9 @@ namespace Dungeon
                         case "x":
                         case "escape":
                             Console.WriteLine("Thank you for playing the Dungeon Game\n\n");
+
                             exit = true;
-                            exitGame = true;
+
                             break;//break the fall!
 
 
@@ -70,6 +116,8 @@ namespace Dungeon
                 } while (!exit);
 
             } while (!exitGame);
+
+        endOfProgram:;
         }
     }
 }
