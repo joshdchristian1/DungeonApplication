@@ -10,67 +10,25 @@ namespace Dungeon
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to the Dungeon!");
+            Console.WriteLine("Welcome to the Dungeon!\n");
             Console.Title = "Dungeon Game";
 
+            //TODO Create Character
 
-            bool exitGame = false;
-        characterSelectMenu:;
+            bool exit = false;
+        
             do
             {
-                Console.WriteLine("Please choose your Warrior");
-                Console.WriteLine("A) Rylan\nB) McKenna\nC) Rachel\nD) Josh\nX) Exit");
-                string userCharacter = Console.ReadKey(true).Key.ToString().ToLower();
-                Console.Clear();
-
-
-                switch (userCharacter)
-                {
-
-                    case "a":
-                        Console.WriteLine("You chose Rylan\n");
-                        break;//break the fall!
-
-
-
-                    //if withdraw, ask them for the amount to withdraw, and display the amount being withdrawn
-                    case "b":
-                        Console.WriteLine("You chose McKenna\n");
-
-                        break;//break the fall!
-
-
-                    case "c":
-                        Console.WriteLine("You chose Rachel\n");
-                        break;//break the fall!
-
-                    case "d":
-                        Console.WriteLine("You chose Josh\n");
-                        break;//break the fall!
-
-
-                    case "x":
-                    case "escape":
-                        Console.WriteLine("Thank you for playing the Dungeon Game\n\n");
-                           
-                        goto endOfProgram;
-                        break;//break the fall!
-
-
-                    default:
-                        Console.WriteLine("That was not a valid option.\n");
-                        goto characterSelectMenu;
-                        break;
-                }//end switch
-                //TODO Create Character
+                Console.WriteLine(Room());
 
                 //TODO Create Monster
-                //TODO Create A Room
-                bool exit = false;
+
+
+                bool reload = false;
 
                 do
                 {
-                    Console.WriteLine("Please select one of the following options");
+                    Console.WriteLine("\nPlease select one of the following options");
                     Console.WriteLine("A) Attack\nR) Run away\nC) Character Information\nM) Monster Information\nX) Exit");
                     string userChoice = Console.ReadKey(true).Key.ToString().ToLower();
                     Console.Clear();
@@ -96,7 +54,7 @@ namespace Dungeon
                         case "c":
                             Console.WriteLine("Character Information\n");
                             break;//break the fall!
-                            //TODO Character Information
+                                  //TODO Character Information
 
                         case "m":
                             Console.WriteLine("Monster Information\n");
@@ -105,6 +63,7 @@ namespace Dungeon
 
 
                         case "x":
+                        case "e":
                         case "escape":
                             Console.WriteLine("Thank you for playing the Dungeon Game\n\n");
 
@@ -117,11 +76,37 @@ namespace Dungeon
                             Console.WriteLine("That was not a valid option.\n");
                             break;
                     }//end switch
-                } while (!exit);
+                } while (!exit && !reload); 
 
-            } while (!exitGame);
+            } while (!exit);
 
-        endOfProgram:;
-        }
-    }
-}
+        
+        }//end main()
+
+        private static string Room()
+        {
+
+            string[] rooms =
+            {
+                "Your room is perched high on a cliffside with the wind swirling around you.",
+                "The room is nearly pitch black, you hear sounds but can barely see your hand in front of your face.",
+                "The room is watery and dank, it must be where all the waste comes to rest.",
+                "The room has the acrid smell of sulfur, it is unbearable hot.",
+                "The room is white with frost, you feel a spine tingling sensation creep up your back",
+
+
+            };
+
+
+            Random randomRoom = new Random();
+
+            int indexNbr = randomRoom.Next(rooms.Length);
+
+            string room = rooms[indexNbr];
+
+            return room;
+
+        }//end Room()
+
+    }//end class
+}//end namespace
