@@ -17,18 +17,14 @@ namespace DungeonLibrary
         private int _hitChance;
         private int _block;
         private int _maxLife;
-        private int _minLife;
+
 
         public int MaxLife
         {
             get { return _maxLife; }
             set { _maxLife = value; }
         }
-        public int MinLife
-        {
-            get { return _minLife; }
-            set { _minLife = value; }
-        }
+
         public int Life
         {
             get { return _life; }
@@ -66,10 +62,9 @@ namespace DungeonLibrary
         }
 
 
-        public Character(int maxLife, string name, int hitChance, int block, int life, int minLife)
+        public Character(int maxLife, string name, int hitChance, int block, int life)
         {
             MaxLife = maxLife;
-            MinLife = minLife;
             Life = life;
             Name = name;
             HitChance = hitChance;
@@ -80,7 +75,7 @@ namespace DungeonLibrary
 
         public override string ToString()
         {
-            return string.Format($"Current Health: {Life}\nName: {Name}\nHit Chance: {HitChance}\nBlock: {Block}\nMax Health: {MaxLife}\nMin Health: {MinLife}");
+            return string.Format($"Current Health: {Life} out of {MaxLife}\nName: {Name}\nHit Chance: {HitChance}\nBlock: {Block}\n");
         }
 
         public int CalBlock()
@@ -114,23 +109,6 @@ namespace DungeonLibrary
             get { return _maxDamage; }
             set { _maxDamage = value; }
         }
-        public int MinDamage
-        {
-            get { return _minDamage; }
-            set
-            {
-                if (MinDamage > MaxDamage)
-                {
-                    _minDamage = MaxDamage;
-                }
-
-                else
-                {
-                    _minDamage = value;
-                }
-
-            }
-        }
 
         public string Name
         {
@@ -148,6 +126,23 @@ namespace DungeonLibrary
         {
             get { return _isTwoHanded; }
             set { _isTwoHanded = value; }
+        }
+        public int MinDamage
+        {
+            get { return _minDamage; }
+            set
+            {
+                if (MinDamage > MaxDamage)
+                {
+                    _minDamage = MaxDamage;
+                }
+
+                else
+                {
+                    _minDamage = value;
+                }
+
+            }
         }
 
         public Weapon(int minDamage, int maxDamage, string name, int bonusHitChance, bool isTwoHanded)

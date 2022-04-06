@@ -17,7 +17,7 @@ namespace Dungeon
 
             //TODO Create Character
 
-            Character c1 = new Character(100, "Rylan", 85, 22, 60, 10);
+            Character c1 = new Character(100, "Rylan", 85, 22, 10);
             Console.WriteLine(c1);
             
             
