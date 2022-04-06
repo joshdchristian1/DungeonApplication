@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DungeonLibrary;
+
 
 namespace Dungeon
 {
@@ -14,6 +16,12 @@ namespace Dungeon
             Console.Title = "Dungeon Game";
 
             //TODO Create Character
+
+            Character c1 = new Character(100, "Rylan", 85, 22, 60, 10);
+            Console.WriteLine(c1);
+            
+            
+            
 
             bool exit = false;
         
