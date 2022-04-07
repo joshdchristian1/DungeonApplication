@@ -95,70 +95,7 @@ namespace DungeonLibrary
 
     #region Weapon
 
-    public class Weapon
-    {
-        private int _minDamage;
-        private int _maxDamage;
-        private string _name;
-        private int _bonusHitChance;
-        private bool _isTwoHanded;
-
-
-        public int MaxDamage
-        {
-            get { return _maxDamage; }
-            set { _maxDamage = value; }
-        }
-
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-
-        public int BonusHitChance
-        {
-            get { return _bonusHitChance; }
-            set { _bonusHitChance = value; }
-        }
-
-        public bool IsTwoHanded
-        {
-            get { return _isTwoHanded; }
-            set { _isTwoHanded = value; }
-        }
-        public int MinDamage
-        {
-            get { return _minDamage; }
-            set
-            {
-                if (MinDamage > MaxDamage)
-                {
-                    _minDamage = MaxDamage;
-                }
-
-                else
-                {
-                    _minDamage = value;
-                }
-
-            }
-        }
-
-        public Weapon(int minDamage, int maxDamage, string name, int bonusHitChance, bool isTwoHanded)
-        {
-            MinDamage = minDamage;
-            MaxDamage = maxDamage;
-            Name = name;
-            BonusHitChance = bonusHitChance;
-            IsTwoHanded = isTwoHanded;
-        }
-
-        public override string ToString()
-        {
-            return string.Format($"Weapon Name: {Name}\nMin Damage: {MinDamage}\nMax Damage: {MaxDamage}\nBonus Hit Chance: {BonusHitChance}\nTwo Handed Weapon? {IsTwoHanded}");
-        }
-    }
+   
 
     #endregion
 
