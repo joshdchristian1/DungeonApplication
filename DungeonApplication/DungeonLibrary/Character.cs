@@ -25,23 +25,6 @@ namespace DungeonLibrary
             set { _maxLife = value; }
         }
 
-        public int Life
-        {
-            get { return _life; }
-            set
-            {
-                if (Life > MaxLife)
-                {
-                    _life = MaxLife;
-                }
-                else
-                {
-
-                    _life = value;
-
-                }
-            }
-        }
 
         public string Name
         {
@@ -61,6 +44,23 @@ namespace DungeonLibrary
             set { _block = value; }
         }
 
+        public int Life
+        {
+            get { return _life; }
+            set
+            {
+                if (MaxLife > value )
+                {
+                    _life = value;
+                }
+                else
+                {
+
+                    _life = MaxLife;
+
+                }
+            }
+        }
 
         public Character(int maxLife, string name, int hitChance, int block, int life)
         {
@@ -85,7 +85,12 @@ namespace DungeonLibrary
             return Block;
         }
 
-        public int CalcDamage()
+        public virtual int CalcDamage()
+        {
+            return 0;
+        }
+
+        public virtual int CalcHitChance()
         {
             return 0;
         }
@@ -93,12 +98,7 @@ namespace DungeonLibrary
     }
     #endregion
 
-    #region Weapon
-
-   
-
-    #endregion
-
+    
 }
 
 
