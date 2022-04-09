@@ -15,19 +15,14 @@ namespace DungeonLibrary
 
 
 
-        private WeaponType _weaponType;
         private int _minDamage;
         private int _maxDamage;
         private string _name;
         private int _bonusHitChance;
         private bool _isTwoHanded;
+        private WeaponType _weaponType;
 
 
-       public WeaponType WeaponType
-        {
-            get { return _weaponType; }
-            set { _weaponType = value; }
-        }
         public int MaxDamage
         {
             get { return _maxDamage; }
@@ -51,19 +46,24 @@ namespace DungeonLibrary
             get { return _isTwoHanded; }
             set { _isTwoHanded = value; }
         }
+       public WeaponType WeaponType
+        {
+            get { return _weaponType; }
+            set { _weaponType = value; }
+        }
         public int MinDamage
         {
             get { return _minDamage; }
             set
             {
-                if (MinDamage > MaxDamage)
+                if (value > 0 && value <= MaxDamage)
                 {
-                    _minDamage = MaxDamage;
+                    _minDamage = value;
                 }
 
                 else
                 {
-                    _minDamage = value;
+                    _minDamage = 1;
                 }
 
             }
@@ -81,7 +81,7 @@ namespace DungeonLibrary
 
         public override string ToString()
         {
-            return string.Format($"Weapon Name: {Name}\nWeapon Type: {WeaponType}\nMin Damage: {MinDamage}\nMax Damage: {MaxDamage}\nBonus Hit Chance: {BonusHitChance}\nTwo Handed Weapon? {IsTwoHanded}");
+            return string.Format($"{Name}\nWeapon Type: {WeaponType}\nMin Damage: {MinDamage}\nMax Damage: {MaxDamage}\nBonus Hit Chance: {BonusHitChance}\n {(IsTwoHanded ?"Two-handed" :"One-Handed")}");
         }
     }
 

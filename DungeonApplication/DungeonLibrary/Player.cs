@@ -12,89 +12,79 @@ namespace DungeonLibrary
 
 
         //Properties
-        public Race Race { get; set; }
+        public Race CharacterRace { get; set; }
 
-        public Weapon Weapon { get; set; }
+        public Weapon EquippedWeapon { get; set; }
 
         //Constructor
 
-        public Player(Race race, Weapon weapon, int maxLife, string name, int hitChance, int block, int life) : base(maxLife, name, hitChance, block, life)
+        public Player(Race characterRace , Weapon equippedweapon, int maxLife, string name, int hitChance, int block, int life) : base(maxLife, name, hitChance, block, life)
         {
-            Race = race;
-            Weapon = weapon;
+            CharacterRace = characterRace;
+            EquippedWeapon = equippedweapon;
+
+            #region Potential Expansion - Racial Bonuses
+
+            //switch (CharacterRace)
+            //{
+            //    case Race.Elf:
+            //        HitChance += 5;
+            //        break;
+            //}
+
+            #endregion
         }
+
+        public override string ToString()
+        {
+            string description = "";
+
+            switch (CharacterRace)
+            {
+                case Race.Human:
+                    description = "Human, A lifeform that makes up for its fragile frame with raw brutality\n";
+                    break;
+                case Race.Elf:
+                    description = "Elf, A noble creature small in stature with a fondness of ranged weapons\n";
+                    break;
+                case Race.Orc:
+                    description = "Orc, A brutish warrior, whose large frame is perfect for dealing out damage\n";
+                    break;
+                case Race.Warlock:
+                    description = "Warlock, A humanoid creature who deals in the dark arts\n";
+                    break;
+                case Race.Paladin:
+                    description = "Paladin, A humanoid creature with a suit of armor who deals in white magic\n";
+                    break;
+                case Race.ShapeShifter:
+                    description = "Shapeshifter, A polymorphic being hell-bent on destruction\n";
+                    break;
+                case Race.Cyborg:
+                    description = "Cyborg, Half man, half machine, cold, calculating and deadly efficient\n";
+                    break;
+                
+            }//end switch
+
+            return string.Format($" *-=-={Name}=-=-*\nLife: {Life} of {MaxLife}\nHit Chance: {HitChance}%\nWeapon: {EquippedWeapon}\nBlock: {Block}\nDescription: {description}");
+        
+        
+        }//end override
+
 
         //Methods
         public override int CalcDamage()
         {
             Random rand = new Random();
-            int damage = rand.Next(Weapon.MinDamage, Weapon.MaxDamage);
-            return (damage);//random value between the Equipped Weapon's min and max damage amount;
+            int damage = rand.Next(EquippedWeapon.MinDamage, EquippedWeapon.MaxDamage + 1);
+            return damage;
         }
 
         public override int CalcHitChance()
         {
-            return (base.CalcHitChance() + Weapon.BonusHitChance); //calculation that includes base.CalHitChance() plus the Equipped Weapons bonus hit chance
+            return (base.CalcHitChance() + EquippedWeapon.BonusHitChance); 
         }
 
-        public override string ToString()
-        {
-            string[] raceDescriptions =
-            {
-                "A lifeform that makes up for its fragile frame with raw brutality",
-                "A noble creature small in stature with a fondness of ranged weapons",
-                "A brutish warrior, whose large frame is perfect for dealing out damage",
-                "A humanoid creature who deals in the dark arts",
-                "A humanoid creature with a suit of armor who deals in white magic",
-                "A polymorphic being hell-bent on destruction",
-                "Half man, half machine, cold, calculating and deadly efficient"
-            };
-                bool exit = false;
-            do
-            {
-
-
-
-                switch (userRaceChoice)
-                {
-                    case "Human":
-                        Console.WriteLine(raceDescriptions[0]);
-                        break;
-
-                    case "Elf":
-                        Console.WriteLine(raceDescriptions[1]);
-                        break;
-
-                    case "Orc":
-                        Console.WriteLine(raceDescriptions[2]);
-                        break;
-
-                    case "Warlock":
-                        Console.WriteLine(raceDescriptions[3]);
-                        break;
-
-                    case "Paladin":
-                        Console.WriteLine(raceDescriptions[4]);
-                        break;
-
-                    case "Shapeshifter":
-                        Console.WriteLine(raceDescriptions[5]);
-                        break;
-
-                    case "Cyborg":
-                        Console.WriteLine(raceDescriptions[6]);
-                        break;
-
-
-                    default:
-                        Console.WriteLine("That was not a valid choice");
-                        break;
-                } 
-
-            } while (!exit);
-            //return base.ToString();
-            //Decrip based on char race before the return string.Format() and thinking about which branching logic is best suited for exact matching(switch).
-        }
+        
 
     }
 }

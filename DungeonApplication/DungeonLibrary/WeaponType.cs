@@ -9,13 +9,10 @@ namespace DungeonLibrary
     public enum WeaponType
     {
 
-        Claymore,
-        Rapier,
+        Sword,
         Dagger,
-        BattleAxe,
+        Axe,
         Staff,
-        NunChucks,
-        Shuriken,
         Bow,
         Rifle
 
