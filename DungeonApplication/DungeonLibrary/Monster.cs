@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonLibrary
 {
-    internal class Monster : Character
+    public class Monster : Character
     {
         //Fields
         private int _minDamage;
@@ -36,7 +36,23 @@ namespace DungeonLibrary
         //Constructor
         public Monster(int maxLife, string name, int hitChance, int block, int life, int minDamage, int maxDamage, string description) : base(maxLife, name, hitChance, block, life)
         {
+            MaxDamage = maxDamage;
+            MinDamage = minDamage;
+            Description = description;
         }
+
+        public Monster () { }
         //Methods
+        public override string ToString()
+        {
+            return string.Format($"\n-----------MONSTER------------\nLife: {Life} of {MaxLife}\nDamage: {MinDamage} to {MaxDamage}\nDescription:\n{Description}");
+        }
+
+        public override int CalcDamage()
+        {
+            Random rand = new Random();
+            return rand.Next(MinDamage, MaxDamage + 1);
+        }
+
     }
 }
