@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonLibrary
 {
-    public class Serpent : Monster
+    public sealed class Serpent : Monster
     {
         public bool IsVenomous { get; set; }
         public Serpent(int maxLife, string name, int hitChance, int block, int life, int minDamage, int maxDamage, string description, bool isVenomous) : base(maxLife, name, hitChance, block, life, minDamage, maxDamage, description)
@@ -34,7 +34,7 @@ namespace DungeonLibrary
 
         public override string ToString()
         {
-            return base.ToString() + (IsVenomous ? " Venom make this snake ever more deadly" : " Non-venomous");
+            return base.ToString() + (IsVenomous ? ". Venom make this snake ever more deadly" : ". This is a Non-venomous");
         }
 
         public override int CalcBlock()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonLibrary
 {
-    public class Wolf : Monster
+    public sealed class Wolf : Monster
     {
         //Fields
 
@@ -35,13 +35,13 @@ namespace DungeonLibrary
             Block = 10;
             MinDamage = 1;
             MaxDamage = 5;
-            Description = "A Young Wolf.";
+            Description = "A Young Wolf";
             IsDire = false;
         }
 
         public override string ToString()
         {
-            return base.ToString() + (IsDire ? " An oversized mountain of a wolf" : " an average-sized wolf");
+            return base.ToString() + (IsDire ? ". This is a dire wolf" : " of average size.");
         }
 
 

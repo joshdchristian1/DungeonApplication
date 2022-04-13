@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonLibrary
 {
-    public class Dragon : Monster
+    public sealed class Dragon : Monster
     {
         public bool IsFlying { get; set; }
         public Dragon(int maxLife, string name, int hitChance, int block, int life, int minDamage, int maxDamage, string description, bool isFlying) : base(maxLife, name, hitChance, block, life, minDamage, maxDamage, description)
@@ -35,7 +35,7 @@ namespace DungeonLibrary
 
         public override string ToString()
         {
-            return base.ToString() + (IsFlying ? " The dragon has taken flight" : " The Dragon has remained Earthbound");
+            return base.ToString() + (IsFlying ? " .The Dragon has taken flight" : " .The Dragon has remained Earthbound");
         }
 
 

@@ -25,12 +25,42 @@ namespace DungeonLibrary
 
             #region Potential Expansion - Racial Bonuses
 
-            //switch (CharacterRace)
-            //{
-            //    case Race.Elf:
-            //        HitChance += 5;
-            //        break;
-            //}
+            
+
+            switch (CharacterRace)
+            {
+                case Race.Human:
+                    HitChance += 5;
+                    Block += 5;
+                    break;
+
+                case Race.Elf:
+                    HitChance += 10;
+                    break;
+
+                case Race.Orc:
+                    EquippedWeapon.MaxDamage += 5;
+                    break;
+
+                case Race.Warlock:
+                    HitChance += 5;
+                    MaxLife += 5;
+                    Life += 5;
+                    break;
+
+                case Race.Paladin:
+                    MaxLife += 10;
+                    Life += 10;
+                    break;
+
+                case Race.ShapeShifter:
+                    Block += 10;
+                    break;
+
+                case Race.Cyborg:
+                    HitChance += 10;
+                    break;
+            }
 
             #endregion
         }

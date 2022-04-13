@@ -25,6 +25,7 @@ namespace Dungeon
 
             //Weapons
             //Type, Name, Min Damage, Max Damage, Bonus Hit Chance, Two Handed
+            Weapon generic = new Weapon(WeaponType.Axe, "Generic", 1, 2, 2, false);
             Weapon claymore = new Weapon(WeaponType.Sword, "Claymore", 3, 12, 10, true);
             Weapon rapier = new Weapon(WeaponType.Sword, "Rapier", 1, 8, 20, false);
             Weapon battleAxe = new Weapon(WeaponType.Axe, "Battle Axe", 5, 20, 0, true);
@@ -36,7 +37,7 @@ namespace Dungeon
             Weapon longBow = new Weapon(WeaponType.Bow, "Long Bow", 1, 6, 13, true);
             Weapon recurvedBow = new Weapon(WeaponType.Bow, "Recurved Bow", 1, 9, 9, true);
             Weapon blackPowderRifle = new Weapon(WeaponType.Rifle, "Black Powder Rife", 5, 12, 5, true);
-            Weapon laserRifle = new Weapon(WeaponType.Rifle, "Laser Rife", 3, 10, 15, true);
+            Weapon laserRifle = new Weapon(WeaponType.Rifle, "Laser Rifle", 3, 10, 15, true);
 
             List<Weapon> weapons = new List<Weapon>();
             weapons.Add(claymore);
@@ -58,13 +59,13 @@ namespace Dungeon
             //Players
             //Player Race, equippedweapon, MaxLife, Name, HitChance, Block, Life
 
-            Player player0 = new Player(Race.Human, claymore, 30, "Rylan", 85, 20, 30);
-            Player player1 = new Player(Race.Orc, battleAxe, 30, "Josh", 75, 35, 30);
-            Player player2 = new Player(Race.Elf, recurvedBow, 30, "Rachel", 60, 50, 30);
-            Player player3 = new Player(Race.Warlock, fireStaff, 30, "McKenna", 65, 55, 30);
-            Player player4 = new Player(Race.Paladin, frostStaff, 40, "Iteara", 40, 80, 40);
-            Player player5 = new Player(Race.ShapeShifter, dirk, 30, "Alivia", 50, 50, 30);
-            Player player6 = new Player(Race.Cyborg, laserRifle, 30, "Ella", 80, 10, 30);
+            Player player0 = new Player(Race.Paladin, generic, 30, "Rylan", 85, 20, 30);
+            Player player1 = new Player(Race.Human, generic, 30, "Josh", 75, 35, 30);
+            Player player2 = new Player(Race.Elf, generic, 30, "Rachel", 60, 50, 30);
+            Player player3 = new Player(Race.Warlock, generic, 30, "McKenna", 65, 55, 30);
+            Player player4 = new Player(Race.Orc, generic, 40, "Iteara", 40, 80, 40);
+            Player player5 = new Player(Race.ShapeShifter, generic, 30, "Alivia", 50, 50, 30);
+            Player player6 = new Player(Race.Cyborg, generic, 30, "Ella", 80, 10, 30);
 
             //List<Player> player = new List<Player>();
             //player.Add(player0);
@@ -75,9 +76,11 @@ namespace Dungeon
             //player.Add(player5);
             //player.Add(player6);
 
+            #region Character Select Menu
+
 
             bool exitChar = false;
-                Player player = player0;
+            Player player = player0;
             do
             {
                 Console.WriteLine("\nPlease select your character.\n");
@@ -89,65 +92,58 @@ namespace Dungeon
                 switch (userChar)
                 {
                     case "a":
-                        Console.ForegroundColor = ConsoleColor.Blue;
+                        
                         player = player0;
-                        Console.WriteLine(player0);
-                        Console.ForegroundColor = ConsoleColor.White;
+                        
                         exitChar = true;
                         break;
 
-                        case "b":
-                        Console.ForegroundColor = ConsoleColor.Blue;
+                    case "b":
+                        
                         player = player1;
-                        Console.WriteLine(player1);
-                        Console.ForegroundColor = ConsoleColor.White;
+                        
                         exitChar = true;
                         break;
 
                     case "c":
-                        Console.ForegroundColor = ConsoleColor.Blue;
+                        
                         player = player2;
-                        Console.WriteLine(player2);
-                        Console.ForegroundColor = ConsoleColor.White;
+                        
                         exitChar = true;
                         break;
 
                     case "d":
-                        Console.ForegroundColor = ConsoleColor.Blue;
+                        
                         player = player3;
-                        Console.WriteLine(player3);
-                        Console.ForegroundColor = ConsoleColor.White;
+                        
                         exitChar = true;
                         break;
 
                     case "e":
-                        Console.ForegroundColor = ConsoleColor.Blue;
+                        
                         player = player4;
-                        Console.WriteLine(player4);
-                        Console.ForegroundColor = ConsoleColor.White;
+                        
                         exitChar = true;
                         break;
 
                     case "f":
-                        Console.ForegroundColor = ConsoleColor.Blue;
+                        
                         player = player5;
-                        Console.WriteLine(player5);
-                        Console.ForegroundColor = ConsoleColor.White;
+                       
                         exitChar = true;
                         break;
 
                     case "g":
-                        Console.ForegroundColor = ConsoleColor.Blue;
+                        
                         player = player6;
-                        Console.WriteLine(player6);
-                        Console.ForegroundColor = ConsoleColor.White;
+                        
                         exitChar = true;
                         break;
 
                     case "x":
                         Console.WriteLine("\n\nThank you for playing the Dungeon Game\n\n");
                         goto endGame;
-                        
+
 
                     default:
                         Console.WriteLine("\nThat was not a valid choice\n");
@@ -161,7 +157,160 @@ namespace Dungeon
 
 
 
+            #endregion
 
+
+            bool exitRace = false;
+
+            do
+            {
+                Console.WriteLine("\nPlease select your Race.\n");
+                Console.WriteLine("A) Human\nB) Elf\nC) Orc\nD) Warlock\nE) Paladin\nF) Shapeshifter\nG) Cyborg\nX) Back to Character Selection Menu");
+                string userRace = Console.ReadKey(true).Key.ToString().ToLower();
+                Console.Clear();
+
+
+                switch (userRace)
+                {
+                    case "a":
+                        player.CharacterRace = Race.Human;                   
+                        exitRace = true;
+                        break;
+
+                    case "b":
+                        player.CharacterRace = Race.Elf;
+                        exitRace = true;
+                        break;
+
+                    case "c":
+                        player.CharacterRace = Race.Orc;
+                        exitRace = true;
+                        break;
+
+                    case "d":
+                        player.CharacterRace = Race.Warlock;
+                        exitRace = true;
+                        break;
+
+                    case "e":
+                        player.CharacterRace = Race.Paladin;
+                        exitRace = true;
+                        break;
+
+                    case "f":
+                        player.CharacterRace = Race.ShapeShifter;
+                        exitRace = true;
+                        break;
+
+                    case "g":
+                        player.CharacterRace = Race.Cyborg;
+                        exitRace = true;
+                        break;
+
+
+
+                    case "x":
+                        Console.WriteLine("\n\nBack to Character Selection Menu\n\n");
+                        goto mainMenu;
+
+
+                    default:
+                        Console.WriteLine("\nThat was not a valid choice\n");
+                        break;
+                }
+
+
+            } while (!exitRace);
+
+            bool exitWeapon = false;
+
+            do
+            {
+                
+
+                Console.WriteLine("\nPlease select your Weapon.\n");
+                Console.WriteLine("A) Claymore\nB) Rapier\nC) Battle Axe\nD) Viking Axe\nE) Stiletto\nF) Dirk\nG) Fire Staff\nH) Frost Staff\nI) Long Bow\nJ) Recurved Bow\nK) Black Powder Rifle\nL) Laser Rifle\nX) Back to Character Selection Menu");
+                string userWeapon = Console.ReadKey(true).Key.ToString().ToLower();
+                Console.Clear();
+
+                switch (userWeapon)
+                {
+                    case "a":
+                        player.EquippedWeapon = claymore;
+                        exitWeapon = true;
+                        break;
+
+                    case "b":
+                        player.EquippedWeapon = rapier;
+                        exitWeapon = true;
+                        break;
+
+                    case "c":
+                        player.EquippedWeapon = battleAxe;
+                        exitWeapon = true;
+                        break;
+
+                    case "d":
+                        player.EquippedWeapon = vikingAxe;
+                        exitWeapon = true;
+                        break;
+
+                    case "e":
+                        player.EquippedWeapon = stiletto;
+                        exitWeapon = true;
+                        break;
+
+                    case "f":
+                        player.EquippedWeapon = dirk;
+                        exitWeapon = true;
+                        break;
+
+                    case "g":
+                        player.EquippedWeapon = fireStaff;
+                        exitWeapon = true;
+                        break;
+
+                    case "h":
+                        player.EquippedWeapon = frostStaff;
+                        exitWeapon = true;
+                        break;
+
+                    case "i":
+                        player.EquippedWeapon = longBow;
+                        exitWeapon = true;
+                        break;
+
+                    case "j":
+                        player.EquippedWeapon = recurvedBow;
+                        exitWeapon = true;
+                        break;
+
+                    case "k":
+                        player.EquippedWeapon = blackPowderRifle;
+                        exitWeapon = true;
+                        break;
+
+                    case "l":
+                        player.EquippedWeapon = laserRifle;
+                        exitWeapon = true;
+                        break;
+
+                    case "x":
+                        Console.WriteLine("\n\nBack to Character Selection Menu\n\n");
+                        goto mainMenu;
+
+
+                    default:
+                        Console.WriteLine("\nThat was not a valid choice\n");
+                        break;
+                }
+
+
+            } while (!exitWeapon);
+
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(player);
+            Console.ForegroundColor = ConsoleColor.White;
 
 
 
@@ -172,7 +321,9 @@ namespace Dungeon
 
             do
             {
+                Console.ForegroundColor= ConsoleColor.Magenta;
                 Console.WriteLine(Room());
+                Console.ForegroundColor = ConsoleColor.White;
 
                 //Life, Name, hit chance, block, life, min damage, max damage, Description
                 Wolf rabidWolf = new Wolf(20, "Rabid Wolf", 50, 40, 20, 3, 16, "A wolf that is foaming out of his mouth");
@@ -181,9 +332,9 @@ namespace Dungeon
                 Dragon greenDragon = new Dragon(10, "Green Dragon", 20, 20, 10, 2, 8, "A large green dragon");
                 Dragon elderDragon = new Dragon(15, "Elder Dragon", 30, 25, 15, 3, 10, "A wise and fierce dragon", true);
                 Serpent copperhead = new Serpent(10, "Copperhead", 35, 30, 6, 1, 10, "A coiled, hissing snake ready to strike", true);
-                Serpent cobra = new Serpent(10, "Cobra", 40, 35, 10, 2, 12, "A Diamond back snake with venom dripping fangs", true);
+                Serpent cobra = new Serpent(10, "Cobra", 40, 35, 10, 2, 12, "A hooded snake with dripping fangs", true);
                 Dinosaur raptor = new Dinosaur(12, "Raptor", 30, 30, 12, 1, 8, "Quick and nimble with razor sharp claws", true);
-                Dinosaur tyrannosaurusRex = new Dinosaur(20, "Tyrannosaurus Rex", 70, 40, 20, 4, 15, "The king of the Dinos");
+                Dinosaur tyrannosaurusRex = new Dinosaur(20, "Tyrannosaurus Rex", 70, 40, 20, 4, 15, "The king of the Dinos", true);
                 Dinosaur triceratops = new Dinosaur(12, "Triceratops", 40, 40, 12, 1, 5, "A stout Dino with Three horns");
                 Wolf wolfPup = new Wolf();
                 Dragon whiteDragon = new Dragon();
@@ -259,13 +410,17 @@ namespace Dungeon
 
 
                         case "c":
+                            Console.ForegroundColor = ConsoleColor.Blue;
                             Console.WriteLine(player);
+                            Console.ForegroundColor = ConsoleColor.White;
                             Console.WriteLine($"\nMonsters defeated: {score}");
                             break;//break the fall!
 
 
                         case "m":
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.WriteLine(monster);
+                            Console.ForegroundColor = ConsoleColor.White;
 
                             break;//break the fall!
 
@@ -309,11 +464,13 @@ namespace Dungeon
 
             string[] rooms =
             {
-                "Your room is perched high on a cliffside with the wind swirling around you.",
+                "The room is perched high on a cliffside with the wind swirling around you.",
                 "The room is nearly pitch black, you hear sounds but can barely see your hand in front of your face.",
                 "The room is watery and dank, it must be where all the waste comes to rest.",
                 "The room has the acrid smell of sulfur, it is unbearably hot.",
                 "The room is white with frost, you feel a spine tingling sensation creep up your back",
+                "The room has a disorienting effect...Your senses are warped, your balance is shifting",
+                "The room's walls are trickling a dark red substance...Better stick to the center of the room"
 
 
             };

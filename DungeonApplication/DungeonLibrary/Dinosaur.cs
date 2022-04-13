@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonLibrary
 {
-    public class Dinosaur : Monster
+    public sealed class Dinosaur : Monster
     {
         public bool IsCarnivore { get; set; }
         public Dinosaur(int maxLife, string name, int hitChance, int block, int life, int minDamage, int maxDamage, string description, bool isCarnivore) : base(maxLife, name, hitChance, block, life, minDamage, maxDamage, description)
@@ -28,13 +28,13 @@ namespace DungeonLibrary
             Block = 10;
             MinDamage = 1;
             MaxDamage = 5;
-            Description = "Though just a hatchling, this dino is still dangerous.";
+            Description = "Just a baby, but this Dino is still dangerous.";
             IsCarnivore = false;
         }
 
         public override string ToString()
         {
-            return base.ToString() + (IsCarnivore ? " This Dino eats only meat, he can rip through flesh" : " This dino has flat teeth for plants");
+            return base.ToString() + (IsCarnivore ? " .This Dino eats only meat, he can rip through flesh" : " .This Dino is a plant-eater");
         }
 
         public override int CalcBlock()

@@ -72,7 +72,7 @@ namespace DungeonLibrary
 
         public override string ToString()
         {
-            return string.Format($"Current Health: {Life} out of {MaxLife}\nName: {Name}\nHit Chance: {HitChance}\nBlock: {Block}\n");
+            return string.Format($"Current Health: {Life} out of {MaxLife}\nName: {Name}\nHit Chance: {HitChance}%\nBlock: {Block}\n");
         }
 
         public virtual int CalcBlock()
