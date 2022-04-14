@@ -59,7 +59,7 @@ namespace Dungeon
             //Players
             //Player Race, equippedweapon, MaxLife, Name, HitChance, Block, Life
 
-            Player player0 = new Player(Race.Paladin, generic, 30, "Rylan", 85, 20, 30);
+            Player player0 = new Player(Race.Paladin, generic, 30, "Rylan", 80, 20, 30);
             Player player1 = new Player(Race.Human, generic, 30, "Josh", 75, 35, 30);
             Player player2 = new Player(Race.Elf, generic, 30, "Rachel", 60, 50, 30);
             Player player3 = new Player(Race.Warlock, generic, 30, "McKenna", 65, 55, 30);
@@ -92,51 +92,51 @@ namespace Dungeon
                 switch (userChar)
                 {
                     case "a":
-                        
+
                         player = player0;
-                        
+
                         exitChar = true;
                         break;
 
                     case "b":
-                        
+
                         player = player1;
-                        
+
                         exitChar = true;
                         break;
 
                     case "c":
-                        
+
                         player = player2;
-                        
+
                         exitChar = true;
                         break;
 
                     case "d":
-                        
+
                         player = player3;
-                        
+
                         exitChar = true;
                         break;
 
                     case "e":
-                        
+
                         player = player4;
-                        
+
                         exitChar = true;
                         break;
 
                     case "f":
-                        
+
                         player = player5;
-                       
+
                         exitChar = true;
                         break;
 
                     case "g":
-                        
+
                         player = player6;
-                        
+
                         exitChar = true;
                         break;
 
@@ -153,7 +153,7 @@ namespace Dungeon
 
             } while (!exitChar);
 
-            
+
 
 
 
@@ -173,37 +173,48 @@ namespace Dungeon
                 switch (userRace)
                 {
                     case "a":
-                        player.CharacterRace = Race.Human;                   
+                        player.CharacterRace = Race.Human;
+                        player.HitChance += 5;
+                        player.Block += 5;
                         exitRace = true;
                         break;
 
                     case "b":
                         player.CharacterRace = Race.Elf;
+                        player.Block += 2;
                         exitRace = true;
                         break;
 
                     case "c":
                         player.CharacterRace = Race.Orc;
+                        player.EquippedWeapon.MaxDamage += 5;
                         exitRace = true;
                         break;
 
                     case "d":
                         player.CharacterRace = Race.Warlock;
+                        player.HitChance += 5;
+                        player.MaxLife += 5;
+                        player.Life += 5;
                         exitRace = true;
                         break;
 
                     case "e":
                         player.CharacterRace = Race.Paladin;
+                        player.MaxLife += 10;
+                        player.Life += 10;
                         exitRace = true;
                         break;
 
                     case "f":
                         player.CharacterRace = Race.ShapeShifter;
+                        player.Block += 10;
                         exitRace = true;
                         break;
 
                     case "g":
                         player.CharacterRace = Race.Cyborg;
+                        player.HitChance += 10;
                         exitRace = true;
                         break;
 
@@ -226,7 +237,7 @@ namespace Dungeon
 
             do
             {
-                
+
 
                 Console.WriteLine("\nPlease select your Weapon.\n");
                 Console.WriteLine("A) Claymore\nB) Rapier\nC) Battle Axe\nD) Viking Axe\nE) Stiletto\nF) Dirk\nG) Fire Staff\nH) Frost Staff\nI) Long Bow\nJ) Recurved Bow\nK) Black Powder Rifle\nL) Laser Rifle\nX) Back to Character Selection Menu");
@@ -308,11 +319,22 @@ namespace Dungeon
 
             } while (!exitWeapon);
 
+            if (player.CharacterRace == Race.Orc)
+            {
+                player.EquippedWeapon.MaxDamage += 5;
+            }
+
+            else if (player.CharacterRace == Race.Elf && player.EquippedWeapon == longBow || player.EquippedWeapon == recurvedBow || player.EquippedWeapon == blackPowderRifle || player.EquippedWeapon == laserRifle)
+            {
+                player.HitChance += 20;
+            }
+
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(player);
             Console.ForegroundColor = ConsoleColor.White;
 
 
+                int healthPotion = 2;
 
 
 
@@ -321,7 +343,7 @@ namespace Dungeon
 
             do
             {
-                Console.ForegroundColor= ConsoleColor.Magenta;
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine(Room());
                 Console.ForegroundColor = ConsoleColor.White;
 
@@ -372,7 +394,7 @@ namespace Dungeon
                 do
                 {
                     Console.WriteLine("\nPlease select one of the following options");
-                    Console.WriteLine("A) Attack\nR) Run away\nC) Character Information\nM) Monster Information\nX) Exit Game\nZ) Return to Main Menu");
+                    Console.WriteLine("A) Attack\nR) Run away\nC) Character Information\nM) Monster Information\nP) Use Health Potion\nX) Exit Game\nZ) Return to Main Menu");
                     string userChoice = Console.ReadKey(true).Key.ToString().ToLower();
                     Console.Clear();
 
@@ -424,6 +446,31 @@ namespace Dungeon
 
                             break;//break the fall!
 
+                        case "p":
+                            if (healthPotion == 0)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine($"You do not have any Health Potions!");
+                                Console.ForegroundColor = ConsoleColor.White;
+                            }
+
+                            else if (player.Life == player.MaxLife)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine($"Your Health is already full!");
+                                Console.ForegroundColor = ConsoleColor.White;
+                            }
+                            else
+                            {
+                                player.Life += 10;
+                                healthPotion--;
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine($"You have restored 10 Health Points. You have {healthPotion} Health Potion(s) remaining.");
+                                Console.ForegroundColor = ConsoleColor.White;
+
+                            }
+                            break;
+
 
                         case "x":
                         case "e":
@@ -445,7 +492,9 @@ namespace Dungeon
 
                     if (player.Life <= 0)
                     {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine("{0} has been slain!", player.Name);
+                        Console.ForegroundColor = ConsoleColor.White;
                         exit = true;
                     }
                 } while (!exit && !reload);
