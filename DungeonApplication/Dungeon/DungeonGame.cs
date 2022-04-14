@@ -26,7 +26,7 @@ namespace Dungeon
             //Weapons
             //Type, Name, Min Damage, Max Damage, Bonus Hit Chance, Two Handed
             Weapon generic = new Weapon(WeaponType.Axe, "Generic", 1, 2, 2, false);
-            Weapon claymore = new Weapon(WeaponType.Sword, "Claymore", 3, 12, 10, true);
+            Weapon claymore = new Weapon(WeaponType.Sword, "Claymore", 3, 12, 0, true);
             Weapon rapier = new Weapon(WeaponType.Sword, "Rapier", 1, 8, 20, false);
             Weapon battleAxe = new Weapon(WeaponType.Axe, "Battle Axe", 5, 20, 0, true);
             Weapon vikingAxe = new Weapon(WeaponType.Axe, "Viking Axe", 1, 6, 30, false);
@@ -53,28 +53,25 @@ namespace Dungeon
             weapons.Add(blackPowderRifle);
             weapons.Add(laserRifle);
 
+
+
+
             #endregion
 
 
             //Players
             //Player Race, equippedweapon, MaxLife, Name, HitChance, Block, Life
 
-            Player player0 = new Player(Race.Paladin, generic, 30, "Rylan", 80, 20, 30);
-            Player player1 = new Player(Race.Human, generic, 30, "Josh", 75, 35, 30);
-            Player player2 = new Player(Race.Elf, generic, 30, "Rachel", 60, 50, 30);
-            Player player3 = new Player(Race.Warlock, generic, 30, "McKenna", 65, 55, 30);
-            Player player4 = new Player(Race.Orc, generic, 40, "Iteara", 40, 80, 40);
-            Player player5 = new Player(Race.ShapeShifter, generic, 30, "Alivia", 50, 50, 30);
-            Player player6 = new Player(Race.Cyborg, generic, 30, "Ella", 80, 10, 30);
+            Player player0 = new Player(Race.Generic, generic, 30, "Rylan", 80, 20, 30);
+            Player player1 = new Player(Race.Generic, generic, 30, "Josh", 75, 25, 30);
+            Player player2 = new Player(Race.Generic, generic, 30, "Rachel", 60, 40, 30);
+            Player player3 = new Player(Race.Generic, generic, 30, "McKenna", 65, 35, 30);
+            Player player4 = new Player(Race.Generic, generic, 40, "Iteara", 40, 60, 40);
+            Player player5 = new Player(Race.Generic, generic, 35, "Alivia", 50, 50, 35);
+            Player player6 = new Player(Race.Generic, generic, 30, "Ella", 55, 45, 30);
 
-            //List<Player> player = new List<Player>();
-            //player.Add(player0);
-            //player.Add(player1);
-            //player.Add(player2);
-            //player.Add(player3);
-            //player.Add(player4);
-            //player.Add(player5);
-            //player.Add(player6);
+            List<Player> userPlayers = new List<Player>() { player0, player1, player2, player3, player4, player5, player6 };
+
 
             #region Character Select Menu
 
@@ -84,7 +81,7 @@ namespace Dungeon
             do
             {
                 Console.WriteLine("\nPlease select your character.\n");
-                Console.WriteLine("A) Rylan\nB) Josh\nC) Rachel\nD) McKenna\nE) Iteara\nF) Alivia\nG) Ella\nX) Exit Game");
+                Console.WriteLine("A) Rylan\nB) Josh\nC) Rachel\nD) McKenna\nE) Iteara\nF) Alivia\nG) Ella\nZ) Show Player Stats\nEsc) Exit Game");
                 string userChar = Console.ReadKey(true).Key.ToString().ToLower();
                 Console.Clear();
 
@@ -140,7 +137,15 @@ namespace Dungeon
                         exitChar = true;
                         break;
 
-                    case "x":
+                    case "z":
+
+                        foreach (var item in userPlayers)
+                        {
+                            Console.WriteLine($"Name: {item.Name}\nMax Life: {item.MaxLife}\nHit Chance: {item.HitChance}\nBlock: {item.Block} \n");
+                        }
+                        break;
+
+                    case "escape":
                         Console.WriteLine("\n\nThank you for playing the Dungeon Game\n\n");
                         goto endGame;
 
@@ -162,10 +167,12 @@ namespace Dungeon
 
             bool exitRace = false;
 
+            List<Race> userRaceSelection = new List<Race>() { Race.Human, Race.Elf, Race.Orc, Race.Warlock, Race.Paladin, Race.ShapeShifter, Race.Cyborg };
+
             do
             {
                 Console.WriteLine("\nPlease select your Race.\n");
-                Console.WriteLine("A) Human\nB) Elf\nC) Orc\nD) Warlock\nE) Paladin\nF) Shapeshifter\nG) Cyborg\nX) Back to Character Selection Menu");
+                Console.WriteLine("A) Human (+5 Hit Chance) & (+ 5 Block)\nB) Elf (+ 2 Block) & (+ 15 Hit Chance When using Ranged Weapons)\nC) Orc (+ 5 to Max Weapon Damage)\nD) Warlock (+ 5 Hit Chance) & (+ 5 Max Life)\nE) Paladin (+ 10 Max Life)\nF) Shapeshifter (+ 10 Block)\nG) Cyborg (+ 10 Hit Chance)\nX) Back to Character Selection Menu\nESC) Quit Game");
                 string userRace = Console.ReadKey(true).Key.ToString().ToLower();
                 Console.Clear();
 
@@ -224,6 +231,9 @@ namespace Dungeon
                         Console.WriteLine("\n\nBack to Character Selection Menu\n\n");
                         goto mainMenu;
 
+                    case "escape":
+                        goto endGame;
+
 
                     default:
                         Console.WriteLine("\nThat was not a valid choice\n");
@@ -240,7 +250,7 @@ namespace Dungeon
 
 
                 Console.WriteLine("\nPlease select your Weapon.\n");
-                Console.WriteLine("A) Claymore\nB) Rapier\nC) Battle Axe\nD) Viking Axe\nE) Stiletto\nF) Dirk\nG) Fire Staff\nH) Frost Staff\nI) Long Bow\nJ) Recurved Bow\nK) Black Powder Rifle\nL) Laser Rifle\nX) Back to Character Selection Menu");
+                Console.WriteLine("A) Claymore\nB) Rapier\nC) Battle Axe\nD) Viking Axe\nE) Stiletto\nF) Dirk\nG) Fire Staff\nH) Frost Staff\nI) Long Bow\nJ) Recurved Bow\nK) Black Powder Rifle\nL) Laser Rifle\nZ) Show Weapon Stats\nX) Back to Character Selection Menu");
                 string userWeapon = Console.ReadKey(true).Key.ToString().ToLower();
                 Console.Clear();
 
@@ -310,6 +320,13 @@ namespace Dungeon
                         Console.WriteLine("\n\nBack to Character Selection Menu\n\n");
                         goto mainMenu;
 
+                    case "z":
+                        foreach (var item in weapons)
+                        {
+                            Console.WriteLine(item + "\n");
+                        }
+                        break;
+
 
                     default:
                         Console.WriteLine("\nThat was not a valid choice\n");
@@ -326,7 +343,7 @@ namespace Dungeon
 
             else if (player.CharacterRace == Race.Elf && player.EquippedWeapon == longBow || player.EquippedWeapon == recurvedBow || player.EquippedWeapon == blackPowderRifle || player.EquippedWeapon == laserRifle)
             {
-                player.HitChance += 20;
+                player.HitChance += 15;
             }
 
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -334,7 +351,7 @@ namespace Dungeon
             Console.ForegroundColor = ConsoleColor.White;
 
 
-                int healthPotion = 3;
+            int healthPotion = 2;
 
 
 
@@ -416,8 +433,31 @@ namespace Dungeon
 
                                 score++;
 
+                                Random lootDrop = new Random();
+                                int lootRoll = lootDrop.Next(1, 101);
+
+                                if (lootRoll >= 85)
+                                {
+                                    healthPotion += 1;
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine("The monster dropped a Health Potion! You now have " + healthPotion + " Health Potion" + ((healthPotion == 1) ? "." : "s."));
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                }
+
+                                else if (lootRoll <= 5)
+                                {
+                                    healthPotion += 2;
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine("The monster dropped 2 Health Potions! You now have " + healthPotion + " Health Potion" + ((healthPotion == 1) ? "." : "s."));
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                }
+
                                 reload = true;
                             }
+
+
+
+
                             break;//break the fall!
 
 
@@ -435,6 +475,10 @@ namespace Dungeon
                             Console.ForegroundColor = ConsoleColor.Blue;
                             Console.WriteLine(player);
                             Console.ForegroundColor = ConsoleColor.White;
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("You have " + healthPotion + " Health Potion" + ((healthPotion == 1) ? "" : "s") + " remaining.");
+                            Console.ForegroundColor = ConsoleColor.White;
+
                             Console.WriteLine($"\nMonsters defeated: {score}");
                             break;//break the fall!
 
@@ -495,13 +539,27 @@ namespace Dungeon
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine("{0} has been slain!", player.Name);
                         Console.ForegroundColor = ConsoleColor.White;
-                        exit = true;
+                        Console.WriteLine("Would you like to play again? Y/N");
+                        string playAgain = Console.ReadKey(true).Key.ToString().ToLower();
+                        if (playAgain == "y")
+                        {
+                            Console.Clear();
+                            goto mainMenu;
+                        }
+                        else if (playAgain == "n")
+                        {
+                            exit = true;
+
+                        }
+                        
+
                     }
                 } while (!exit && !reload);
 
             } while (!exit);
 
             Console.WriteLine("\nYou defeated " + score + " monster" + ((score == 1) ? "." : "s.\n"));
+
 
         endGame:;
 
