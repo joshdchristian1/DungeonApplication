@@ -334,7 +334,7 @@ namespace Dungeon
             Console.ForegroundColor = ConsoleColor.White;
 
 
-                int healthPotion = 2;
+                int healthPotion = 3;
 
 
 
@@ -465,7 +465,7 @@ namespace Dungeon
                                 player.Life += 10;
                                 healthPotion--;
                                 Console.ForegroundColor = ConsoleColor.Green;
-                                Console.WriteLine($"You have restored 10 Health Points. You have {healthPotion} Health Potion(s) remaining.");
+                                Console.WriteLine("You have restored 10 Health Points. You have " + healthPotion + " Health Potion" + ((healthPotion == 1) ? "" : "s") + " remaining.");
                                 Console.ForegroundColor = ConsoleColor.White;
 
                             }
