@@ -9,12 +9,12 @@ namespace DungeonLibrary
     public sealed class Serpent : Monster
     {
         public bool IsVenomous { get; set; }
-        public Serpent(int maxLife, string name, int hitChance, int block, int life, int minDamage, int maxDamage, string description, bool isVenomous) : base(maxLife, name, hitChance, block, life, minDamage, maxDamage, description)
+        public Serpent(int maxLife, string name, int hitChance, int block, int life, int minDamage, int maxDamage, string description, bool isVenomous, int armor) : base(maxLife, name, hitChance, block, life, minDamage, maxDamage, description, armor)
         {
             IsVenomous = isVenomous;
         }
 
-        public Serpent(int maxLife, string name, int hitChance, int block, int life, int minDamage, int maxDamage, string description) : base(maxLife, name, hitChance, block, life, minDamage, maxDamage, description)
+        public Serpent(int maxLife, string name, int hitChance, int block, int life, int minDamage, int maxDamage, string description, int armor) : base(maxLife, name, hitChance, block, life, minDamage, maxDamage, description, armor)
         {
             IsVenomous = false;
         }
@@ -34,7 +34,7 @@ namespace DungeonLibrary
 
         public override string ToString()
         {
-            return base.ToString() + (IsVenomous ? ". Venom make this snake ever more deadly" : ". This is a Non-venomous");
+            return base.ToString() + (IsVenomous ? " Venom make this snake ever more deadly" : " This is a Non-venomous");
         }
 
         public override int CalcBlock()

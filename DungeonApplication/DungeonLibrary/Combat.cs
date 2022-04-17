@@ -8,6 +8,7 @@ namespace DungeonLibrary
 {
     public class Combat
     {
+
         //This is NOT a datatype class, so it won't have 
         //fields, properties, or constructors. It will 
         //simply serve as a warehoulse for a variety of
@@ -27,7 +28,7 @@ namespace DungeonLibrary
             //System.Threading namespace.
 
             Thread.Sleep(30);
-
+            int armorOverflow = 0;
             //If the attacker "hits"
             if (roll <= (attacker.CalcHitChance() - defender.CalcBlock()))
             {
@@ -35,11 +36,35 @@ namespace DungeonLibrary
                 int damageDealt = attacker.CalcDamage();
 
                 //Subtract & assign the damage to the defender's life
-                defender.Life -= damageDealt;
+                if (defender.Armor != 0 && defender.Armor > damageDealt)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("\nYour Armor absorbed some damage!\n");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    defender.Armor -= damageDealt;
+
+                }
+
+                else if (defender.Armor != 0 && defender.Armor - damageDealt < 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("\nYour Armor absorbed some damage, but that still hurt!\n");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    armorOverflow = damageDealt - defender.Armor;
+                    defender.Armor -= damageDealt;
+                    defender.Life -= armorOverflow;
+
+                }
+
+                else
+                {
+
+                    defender.Life -= damageDealt;
+                }
 
                 //Output the result - Red text helps indicate damage
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("{0} hit {1} for {2} damage!", attacker.Name, defender.Name, damageDealt);
+                Console.WriteLine("{0} hit {1} for {2} damage!\n", attacker.Name, defender.Name, damageDealt);
 
                 //Reset the color
                 Console.ResetColor();
@@ -73,6 +98,31 @@ namespace DungeonLibrary
                 DoAttack(monster, player);
             }
 
+
+        }
+        public static void MultiHit(Player player, Monster monster)
+        {
+            Random rand = new Random();
+            int roll = rand.Next(1, 101);
+            if (roll >= 80)
+            {
+                Console.WriteLine($"The training with your {player.EquippedWeapon.Name} allowed you to strike twice!\n");
+                DoAttack(player, monster);
+
+
+            }
+            else if (roll <= 7)
+            {
+                Console.WriteLine($"Nice work with your {player.EquippedWeapon.Name}. You struck three times!\n");
+                DoAttack(player, monster);
+                DoAttack(player, monster);
+            }
+
+            //if (monster.Life > 0)
+            //{
+
+            //    DoAttack(monster, player);
+            //}
 
         }
     }

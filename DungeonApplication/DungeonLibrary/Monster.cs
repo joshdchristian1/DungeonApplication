@@ -34,7 +34,7 @@ namespace DungeonLibrary
         }
 
         //Constructor
-        public Monster(int maxLife, string name, int hitChance, int block, int life, int minDamage, int maxDamage, string description) : base(maxLife, name, hitChance, block, life)
+        public Monster(int maxLife, string name, int hitChance, int block, int life, int minDamage, int maxDamage, string description, int armor) : base(maxLife, name, hitChance, block, life, armor)
         {
             MaxDamage = maxDamage;
             MinDamage = minDamage;
@@ -45,7 +45,7 @@ namespace DungeonLibrary
         //Methods
         public override string ToString()
         {
-            return string.Format($"\n-----------MONSTER------------\nLife: {Life} of {MaxLife}\nDamage: {MinDamage} to {MaxDamage}\nDescription:\n{Description}");
+            return string.Format($"\n*--------{Name}---------*\nLife: {Life} of {MaxLife}\nDamage: {MinDamage} to {MaxDamage}\nDescription:\n{Description}");
         }
 
         public override int CalcDamage()

@@ -17,6 +17,7 @@ namespace DungeonLibrary
         private int _hitChance;
         private int _block;
         private int _maxLife;
+        private int _armor;
 
         public string Name
         {
@@ -40,6 +41,24 @@ namespace DungeonLibrary
             set { _maxLife = value; }
         }
 
+        public int Armor
+        {
+            get { return _armor; }
+            set
+            {
+                if (value > 0) 
+                {
+                    _armor = value;
+                }
+                else
+                {
+                    _armor = 0;
+                }
+            }
+                                
+            
+        }
+
         public int Life
         {
             get { return _life; }
@@ -58,13 +77,14 @@ namespace DungeonLibrary
             }
         }
 
-        public Character(int maxLife, string name, int hitChance, int block, int life)
+        public Character(int maxLife, string name, int hitChance, int block, int life, int armor)
         {
             Name = name;
             HitChance = hitChance;
             Block = block;
             MaxLife = maxLife;
             Life = life;
+            Armor = armor;
 
         }
 

@@ -14,13 +14,13 @@ namespace DungeonLibrary
         public bool IsDire { get; set; }
 
         //Constructor
-        public Wolf(int maxLife, string name, int hitChance, int block, int life, int minDamage, int maxDamage, string description, bool isDire) : base(maxLife, name, hitChance, block, life, minDamage, maxDamage, description)
+        public Wolf(int maxLife, string name, int hitChance, int block, int life, int minDamage, int maxDamage, string description, bool isDire, int armor) : base(maxLife, name, hitChance, block, life, minDamage, maxDamage, description, armor)
         {
             IsDire = isDire;
 
         }
 
-        public Wolf(int maxLife, string name, int hitChance, int block, int life, int minDamage, int maxDamage, string description) : base(maxLife, name, hitChance, block, life, minDamage, maxDamage, description)
+        public Wolf(int maxLife, string name, int hitChance, int block, int life, int minDamage, int maxDamage, string description, int armor) : base(maxLife, name, hitChance, block, life, minDamage, maxDamage, description, armor)
         {
             IsDire = false;
 
@@ -41,7 +41,7 @@ namespace DungeonLibrary
 
         public override string ToString()
         {
-            return base.ToString() + (IsDire ? ". This is a dire wolf" : " of average size.");
+            return base.ToString() + (IsDire ? " This is a dire wolf" : " of average size");
         }
 
 

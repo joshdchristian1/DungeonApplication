@@ -16,12 +16,15 @@ namespace DungeonLibrary
 
         public Weapon EquippedWeapon { get; set; }
 
+        
+
         //Constructor
 
-        public Player(Race characterRace , Weapon equippedweapon, int maxLife, string name, int hitChance, int block, int life) : base(maxLife, name, hitChance, block, life)
+        public Player(Race characterRace , Weapon equippedweapon, int maxLife, string name, int hitChance, int block, int life, int armor) : base(maxLife, name, hitChance, block, life, armor)
         {
             CharacterRace = characterRace;
             EquippedWeapon = equippedweapon;
+          
 
             #region Potential Expansion - Racial Bonuses
 
@@ -73,30 +76,30 @@ namespace DungeonLibrary
             switch (CharacterRace)
             {
                 case Race.Human:
-                    description = "Human, A lifeform that makes up for its fragile frame with raw brutality\n";
+                    description = "Human, A lifeform that makes up for its fragile frame with raw brutality";
                     break;
                 case Race.Elf:
-                    description = "Elf, A noble creature small in stature with a fondness of ranged weapons\n";
+                    description = "Elf, A noble creature small in stature with a fondness of ranged weapons";
                     break;
                 case Race.Orc:
-                    description = "Orc, A brutish warrior, whose large frame is perfect for dealing out damage\n";
+                    description = "Orc, A brutish warrior, whose large frame is perfect for dealing out damage";
                     break;
                 case Race.Warlock:
-                    description = "Warlock, A humanoid creature who deals in the dark arts\n";
+                    description = "Warlock, A humanoid creature who deals in the dark arts";
                     break;
                 case Race.Paladin:
-                    description = "Paladin, A humanoid creature with a suit of armor who deals in white magic\n";
+                    description = "Paladin, A humanoid creature with a suit of armor who deals in white magic";
                     break;
                 case Race.ShapeShifter:
-                    description = "Shapeshifter, A polymorphic being hell-bent on destruction\n";
+                    description = "Shapeshifter, A polymorphic being hell-bent on destruction";
                     break;
                 case Race.Cyborg:
-                    description = "Cyborg, Half man, half machine, cold, calculating and deadly efficient\n";
+                    description = "Cyborg, Half man, half machine, cold, calculating and deadly efficient";
                     break;
                 
             }//end switch
 
-            return string.Format($" *-=-={Name}=-=-*\nLife: {Life} of {MaxLife}\nHit Chance: {HitChance}%\nWeapon: {EquippedWeapon}\nBlock: {Block}\nDescription: {description}");
+            return string.Format($"*-=-={Name}=-=-*\nLife: {Life} of {MaxLife}\nHit Chance: {HitChance}%\nWeapon: {EquippedWeapon}\nBlock: {Block}\n{description}\nArmor: {Armor}");
         
         
         }//end override
