@@ -62,7 +62,7 @@ namespace Dungeon
 
 
         mainMenu:
-            
+
 
             int score = 0;
 
@@ -84,7 +84,7 @@ namespace Dungeon
             Weapon recurvedBow = new Weapon(WeaponType.Bow, "Recurved Bow", 1, 9, 10, true);
             Weapon blackPowderRifle = new Weapon(WeaponType.Rifle, "Black Powder Rife", 5, 12, 5, true);
             Weapon laserRifle = new Weapon(WeaponType.Rifle, "Laser Rifle", 3, 10, 6, true);
-            Weapon winchester1887 = new Weapon(WeaponType.Rifle, "Winchester Model 1887", 1, 50, 100, false);
+            Weapon winchester1887 = new Weapon(WeaponType.Rifle, "Winchester Model 1887", 1, 20, 20, false);
 
             List<Weapon> weapons = new List<Weapon>();
             weapons.Add(claymore);
@@ -107,16 +107,16 @@ namespace Dungeon
 
 
             //Players
-            //Player Race, equippedweapon, MaxLife, Name, HitChance, Block, Life
+            //Player Race, equippedweapon, MaxLife, Name, HitChance, Block, Life, Armor
 
-            Player player0 = new Player(Race.Generic, generic, 30, "Rylan", 80, 20, 30, 0);
+            Player player0 = new Player(Race.Generic, generic, 30, "Rylan", 85, 15, 30, 0);
             Player player1 = new Player(Race.Generic, generic, 30, "Josh", 75, 25, 30, 0);
             Player player2 = new Player(Race.Generic, generic, 30, "Rachel", 60, 40, 30, 0);
             Player player3 = new Player(Race.Generic, generic, 30, "McKenna", 65, 35, 30, 0);
-            Player player4 = new Player(Race.Generic, generic, 40, "Iteara", 40, 60, 40, 0);
-            Player player5 = new Player(Race.Generic, generic, 35, "Alivia", 50, 50, 35, 0);
-            Player player6 = new Player(Race.Generic, generic, 30, "Ella", 55, 45, 30, 0);
-            Player player7 = new Player(Race.Cyborg, winchester1887, 100, "T-800 Terminator", 100, 100, 100, 0);
+            Player player4 = new Player(Race.Generic, generic, 40, "Iteara", 70, 30, 40, 0);
+            Player player5 = new Player(Race.Generic, generic, 35, "Alivia", 80, 20, 35, 0);
+            Player player6 = new Player(Race.Generic, generic, 30, "Ella", 68, 32, 30, 0);
+            Player player7 = new Player(Race.Cyborg, winchester1887, 100, "T-800 Terminator", 100, 40, 100, 0);
 
             List<Player> userPlayers = new List<Player>() { player0, player1, player2, player3, player4, player5, player6 };
 
@@ -251,7 +251,7 @@ ______
 ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("\nPlease select your Race.\n");
-                Console.WriteLine("A) Human (+5 Hit Chance) & (+ 5 Block)\nB) Elf (+ 2 Block) & (+ 15 Hit Chance When using Ranged Weapons)\nC) Orc (+ 5 to Max Weapon Damage)\nD) Warlock (+ 5 Hit Chance) & (+ 5 Max Life)\nE) Paladin (+ 10 Max Life) & (+ 5 Armor)\nF) Shapeshifter (+ 10 Block)\nG) Cyborg (+ 10 Hit Chance)\nX) Back to Character Selection Menu\nESC) Quit Game");
+                Console.WriteLine("A) Human (+5 Hit Chance) & (+ 5 Block)\nB) Elf (+ 2 Block) & (+ 15 Hit Chance When using Ranged Weapons)\nC) Orc (+ 5 to Max Weapon Damage)\nD) Warlock (+ 5 Hit Chance) & (+ 5 Max Life) & (+ 5 Max Weapon Damage when using a Staff)\nE) Paladin (+ 15 Armor)\nF) Shapeshifter (+ 10 Block)\nG) Cyborg (+ 10 Hit Chance)\nX) Back to Character Selection Menu\nESC) Quit Game");
                 string userRace = Console.ReadKey(true).Key.ToString().ToLower();
                 Console.Clear();
 
@@ -287,21 +287,20 @@ ______
 
                     case "e":
                         player.CharacterRace = Race.Paladin;
-                        player.MaxLife += 10;
-                        player.Life += 10;
-                        player.Armor += 5;
+                        player.Armor += 15;
                         exitRace = true;
                         break;
 
                     case "f":
                         player.CharacterRace = Race.ShapeShifter;
-                        player.Block += 10;
+                        player.Block += 15;
                         exitRace = true;
                         break;
 
                     case "g":
                         player.CharacterRace = Race.Cyborg;
                         player.HitChance += 10;
+                        player.Armor += 5;
                         exitRace = true;
                         break;
 
@@ -438,6 +437,11 @@ ______
                 player.HitChance += 15;
             }
 
+            else if (player.CharacterRace == Race.Warlock && player.EquippedWeapon == frostStaff || player.EquippedWeapon == fireStaff)
+            {
+                player.EquippedWeapon.MaxDamage += 5;
+            }
+
         hiddenStart:
 
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -464,10 +468,10 @@ ______
                 Wolf rabidWolf = new Wolf(20, "Rabid Wolf", 50, 40, 20, 3, 16, "A wolf that is foaming out of his mouth.", 0);
                 Wolf greyWolf = new Wolf(10, "Grey Wolf", 40, 20, 40, 1, 14, "An adult wolf.", 0);
                 Wolf direWolf = new Wolf(25, "Dire Wolf", 40, 30, 70, 2, 20, "A big mangy wolf.", true, 0);
-                Dragon greenDragon = new Dragon(10, "Green Dragon", 20, 20, 10, 2, 8, "A large green dragon.", 0);
-                Dragon elderDragon = new Dragon(15, "Elder Dragon", 30, 25, 15, 3, 10, "A wise and fierce dragon.", true, 0);
-                Serpent copperhead = new Serpent(10, "Copperhead", 35, 30, 6, 1, 10, "A coiled, hissing snake ready to strike.", true, 0);
-                Serpent cobra = new Serpent(10, "Cobra", 40, 35, 10, 2, 12, "A hooded snake with dripping fangs.", true, 0);
+                Dragon greenDragon = new Dragon(12, "Green Dragon", 20, 20, 10, 2, 8, "A large green dragon.", 0);
+                Dragon elderDragon = new Dragon(17, "Elder Dragon", 30, 25, 15, 3, 10, "A wise and fierce dragon.", true, 0);
+                Serpent copperhead = new Serpent(13, "Copperhead", 35, 30, 6, 1, 10, "A coiled, hissing snake ready to strike.", true, 0);
+                Serpent cobra = new Serpent(15, "Cobra", 40, 35, 10, 2, 12, "A hooded snake with dripping fangs.", true, 0);
                 Dinosaur raptor = new Dinosaur(12, "Raptor", 30, 30, 12, 1, 8, "Quick and nimble with razor sharp claws.", true, 0);
                 Dinosaur tyrannosaurusRex = new Dinosaur(20, "Tyrannosaurus Rex", 70, 40, 20, 4, 15, "The king of the Dinos.", true, 0);
                 Dinosaur triceratops = new Dinosaur(12, "Triceratops", 40, 40, 12, 1, 5, "A stout Dino with Three horns.", 0);
@@ -475,6 +479,8 @@ ______
                 Dragon whiteDragon = new Dragon();
                 Serpent garterSnake = new Serpent();
                 Dinosaur babyDino = new Dinosaur();
+                Boss scaryTerry = new Boss();
+                Boss amazonians = new Boss(40, "Amazonian Woman", 80, 10, 40, 1, 15, "Death by Snu-Snu!", 0);
 
 
                 List<Monster> monsters = new List<Monster>();
@@ -493,13 +499,62 @@ ______
                 monsters.Add(rabidWolf);
                 monsters.Add(tyrannosaurusRex);
 
+
+
                 Random rand = new Random();
                 int randomNbr = rand.Next(monsters.Count);
                 Monster monster = monsters[randomNbr];
 
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"\nIn this room you encounter: {monster.Name}\n");
-                Console.ForegroundColor = ConsoleColor.White;
+
+                if (score == 10)
+                {
+                    Console.Clear();
+                    monster = scaryTerry;
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine(@"
+                       __________                      ___________.__       .__     __                          
+  /\|\/\       .__     \______   \ ____  ______ ______ \_   _____/|__| ____ |  |___/  |_     .__       /\|\/\   
+ _)    (__   __|  |___  |    |  _//  _ \/  ___//  ___/  |    __)  |  |/ ___\|  |  \   __\  __|  |___  _)    (__ 
+ \_     _/  /__    __/  |    |   (  <_> )___ \ \___ \   |     \   |  / /_/  >   Y  \  |   /__    __/  \_     _/ 
+   )    \      |__|     |______  /\____/____  >____  >  \___  /   |__\___  /|___|  /__|      |__|       )    \  
+   \/\|\/                      \/           \/     \/       \/      /_____/      \/                     \/\|\/  
+");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"\nIn this room you encounter: {monster.Name}\n");
+                    Console.ForegroundColor = ConsoleColor.White;
+
+
+                }
+                else if (score == 20)
+                {
+
+                    Console.Clear();
+                    monster = amazonians;
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine(@"
+                       __________                      ___________.__       .__     __                          
+  /\|\/\       .__     \______   \ ____  ______ ______ \_   _____/|__| ____ |  |___/  |_     .__       /\|\/\   
+ _)    (__   __|  |___  |    |  _//  _ \/  ___//  ___/  |    __)  |  |/ ___\|  |  \   __\  __|  |___  _)    (__ 
+ \_     _/  /__    __/  |    |   (  <_> )___ \ \___ \   |     \   |  / /_/  >   Y  \  |   /__    __/  \_     _/ 
+   )    \      |__|     |______  /\____/____  >____  >  \___  /   |__\___  /|___|  /__|      |__|       )    \  
+   \/\|\/                      \/           \/     \/       \/      /_____/      \/                     \/\|\/  
+");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"\nIn this room you encounter: {monster.Name}\n");
+                    Console.ForegroundColor = ConsoleColor.White;
+
+                }
+
+                else
+                {
+
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"\nIn this room you encounter: {monster.Name}\n");
+                    Console.ForegroundColor = ConsoleColor.White;
+
+                }
+
+
 
 
                 bool reload = false;
@@ -516,8 +571,27 @@ ______
                     {
 
                         case "a":
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine(@"
+                            if (monster.Name.ToLower().Contains("scary") || monster.Name.ToLower().Contains("amazon"))
+                            {
+
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine(@"
+                       __________                      ___________.__       .__     __                          
+  /\|\/\       .__     \______   \ ____  ______ ______ \_   _____/|__| ____ |  |___/  |_     .__       /\|\/\   
+ _)    (__   __|  |___  |    |  _//  _ \/  ___//  ___/  |    __)  |  |/ ___\|  |  \   __\  __|  |___  _)    (__ 
+ \_     _/  /__    __/  |    |   (  <_> )___ \ \___ \   |     \   |  / /_/  >   Y  \  |   /__    __/  \_     _/ 
+   )    \      |__|     |______  /\____/____  >____  >  \___  /   |__\___  /|___|  /__|      |__|       )    \  
+   \/\|\/                      \/           \/     \/       \/      /_____/      \/                     \/\|\/  
+");
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+
+                            }
+
+                            else
+                            {
+
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.WriteLine(@"
 ______         _    _    _         _____  _                  
 | ___ \       | |  | |  | |       |_   _|(_)                 
 | |_/ /  __ _ | |_ | |_ | |  ___    | |   _  _ __ ___    ___ 
@@ -526,22 +600,30 @@ ______         _    _    _         _____  _
 \____/  \__,_| \__| \__||_| \___|   \_/  |_||_| |_| |_| \___|                                                             
                                                              
 ");
+
+
+                            }
+
                             Console.ForegroundColor = ConsoleColor.DarkCyan;
-                            
-                           // Console.WriteLine(player);
+
+
+                            // Console.WriteLine(player);
                             Console.WriteLine($"{player.Name}....................VS.......................{monster.Name} \n");
 
                             Console.ForegroundColor = ConsoleColor.White;
 
-                            
+
                             //Console.ForegroundColor = ConsoleColor.White;
-                            
+
 
                             if (player.EquippedWeapon == dirk || player.EquippedWeapon == stiletto || player.EquippedWeapon == vikingAxe)
                             {
                                 Combat.MultiHit(player, monster);
                             }
                             Combat.DoBattle(player, monster);
+
+
+
 
                             if (monster.Life <= 0)
                             {
@@ -556,7 +638,20 @@ ______         _    _    _         _____  _
                                 Random lootDrop = new Random();
                                 int lootRoll = lootDrop.Next(1, 101);
 
-                                if (lootRoll >= 85)
+                                if (monster.Name.ToLower().Contains("scary") || monster.Name.ToLower().Contains("amazon"))
+                                {
+                                    healthPotion += 2;
+                                    player.Armor += 15;
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine(monster.Name + " dropped 2 Health Potions! You now have " + healthPotion + " Health Potion" + ((healthPotion == 1) ? "." : "s.\n"));
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine(monster.Name + " dropped some armor! You now have " + player.Armor + " Armor.");
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                }
+
+
+                                else if (lootRoll >= 85)
                                 {
                                     healthPotion += 1;
                                     Console.ForegroundColor = ConsoleColor.Green;
@@ -568,7 +663,7 @@ ______         _    _    _         _____  _
                                 {
                                     player.Armor += 5;
                                     Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.WriteLine(monster.Name + " dropped some armor! You now have " + player.Armor + " Armor");
+                                    Console.WriteLine(monster.Name + " dropped some armor! You now have " + player.Armor + " Armor.");
                                     Console.ForegroundColor = ConsoleColor.White;
                                 }
 
@@ -576,9 +671,6 @@ ______         _    _    _         _____  _
 
                                 reload = true;
                             }
-
-
-
 
                             break;//break the fall!
 
@@ -597,6 +689,7 @@ ______                  ___
                                                |___/ 
 
 ");
+
                             Console.WriteLine($"\n{monster.Name} attacks you as you flee!\n");
                             Combat.DoAttack(monster, player);
                             reload = true;

@@ -45,7 +45,7 @@ namespace DungeonLibrary
         //Methods
         public override string ToString()
         {
-            return string.Format($"\n*--------{Name}---------*\nLife: {Life} of {MaxLife}\nDamage: {MinDamage} to {MaxDamage}\nDescription:\n{Description}");
+            return string.Format($"\n*--------{Name}---------*\nLife: {Life} of {MaxLife}\nDamage: {MinDamage} to {MaxDamage}\nDescription: {Description}");
         }
 
         public override int CalcDamage()
