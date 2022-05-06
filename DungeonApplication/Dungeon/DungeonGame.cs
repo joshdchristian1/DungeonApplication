@@ -481,6 +481,7 @@ ______
                 Dinosaur babyDino = new Dinosaur();
                 Boss scaryTerry = new Boss();
                 Boss amazonians = new Boss(40, "Amazonian Woman", 80, 10, 40, 1, 15, "Death by Snu-Snu!", 0);
+                Boss scuttlebutt = new Boss(40, "Scuttlebutt", 80, 12, 45, 1, 20, "Get him Patrick Duffy!", 0);
 
 
                 List<Monster> monsters = new List<Monster>();
@@ -545,6 +546,26 @@ ______
 
                 }
 
+                else if (score == 30)
+                {
+
+                    Console.Clear();
+                    monster = scuttlebutt;
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine(@"
+                       __________                      ___________.__       .__     __                          
+  /\|\/\       .__     \______   \ ____  ______ ______ \_   _____/|__| ____ |  |___/  |_     .__       /\|\/\   
+ _)    (__   __|  |___  |    |  _//  _ \/  ___//  ___/  |    __)  |  |/ ___\|  |  \   __\  __|  |___  _)    (__ 
+ \_     _/  /__    __/  |    |   (  <_> )___ \ \___ \   |     \   |  / /_/  >   Y  \  |   /__    __/  \_     _/ 
+   )    \      |__|     |______  /\____/____  >____  >  \___  /   |__\___  /|___|  /__|      |__|       )    \  
+   \/\|\/                      \/           \/     \/       \/      /_____/      \/                     \/\|\/  
+");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"\nIn this room you encounter: {monster.Name}\n");
+                    Console.ForegroundColor = ConsoleColor.White;
+
+                }
+
                 else
                 {
 
@@ -571,7 +592,7 @@ ______
                     {
 
                         case "a":
-                            if (monster.Name.ToLower().Contains("scary") || monster.Name.ToLower().Contains("amazon"))
+                            if (monster.Name.ToLower().Contains("scary") || monster.Name.ToLower().Contains("amazon") || monster.Name.ToLower().Contains("scuttle"))
                             {
 
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -638,7 +659,7 @@ ______         _    _    _         _____  _
                                 Random lootDrop = new Random();
                                 int lootRoll = lootDrop.Next(1, 101);
 
-                                if (monster.Name.ToLower().Contains("scary") || monster.Name.ToLower().Contains("amazon"))
+                                if (monster.Name.ToLower().Contains("scary") || monster.Name.ToLower().Contains("amazon") || monster.Name.ToLower().Contains("scuttle"))
                                 {
                                     healthPotion += 2;
                                     player.Armor += 15;
